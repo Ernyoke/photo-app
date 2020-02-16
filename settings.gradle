@@ -1,0 +1,5 @@
+rootProject.name = 'photo-app'
+include 'discovery-service'
+include 'account-management-service'
+include 'gateway-service'
+

@@ -1,0 +1,27 @@
+group = 'dev.esz'
+version = '0.0.1-SNAPSHOT'
+
+allprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = '11'
+
+    ext {
+        set('springCloudVersion', "Hoxton.SR1")
+    }
+
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
