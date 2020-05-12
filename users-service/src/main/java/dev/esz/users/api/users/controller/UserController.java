@@ -3,6 +3,7 @@ package dev.esz.users.api.users.controller;
 import dev.esz.users.api.users.model.CreateUserRequestModel;
 import dev.esz.users.api.users.model.CreateUserResponseModel;
 import dev.esz.users.api.users.service.UserService;
+import dev.esz.users.api.users.service.UserServiceImpl;
 import dev.esz.users.api.users.shared.UserDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
