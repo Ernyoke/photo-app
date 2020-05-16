@@ -6,17 +6,19 @@ plugins {
 group 'dev.esz'
 version '0.0.1-SNAPSHOT'
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    implementation 'org.springframework.cloud:spring-cloud-config-server'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 dependencyManagement {

@@ -3,4 +3,5 @@ include 'discovery-service'
 include 'account-management-service'
 include 'gateway-service'
 include 'users-service'
+include 'config-server'
 
