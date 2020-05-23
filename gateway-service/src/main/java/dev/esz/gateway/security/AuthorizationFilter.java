@@ -1,17 +1,22 @@
 package dev.esz.gateway.security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Key;
 import java.util.ArrayList;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -44,13 +49,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             return null;
         }
 
-        String token = authorizationHeader.replace("authorization.token.header.prefix", "");
+        String token = authorizationHeader.replace(environment.getProperty("authorization.token.header.prefix"), "");
 
-        String userId = Jwts.parser()
+        Jws<Claims> claims = Jwts.parserBuilder()
                 .setSigningKey(environment.getProperty("token.secret"))
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+                .build()
+                .parseClaimsJws(token);
+
+        String userId = claims.getBody().getSubject();
 
         if (userId == null) {
             return null;
